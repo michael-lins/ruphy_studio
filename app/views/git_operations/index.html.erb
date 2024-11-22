@@ -1,0 +1,20 @@
+<h1 class="text-2xl font-bold mb-4">Git Operations</h1>
+
+<div class="space-y-6">
+  <%= form_with url: git_commit_path, method: :post, local: true, class: "space-y-4" do |form| %>
+    <div>
+      <label for="message" class="block text-sm font-medium text-gray-700">Commit Message:</label>
+      <%= text_field_tag :message, nil, required: true, placeholder: "Enter your commit message", class: "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" %>
+    </div>
+    <div>
+      <%= submit_tag "Commit", class: "px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-md shadow hover:bg-indigo-700 focus:outline-none" %>
+    </div>
+  <% end %>
+
+  <%= form_with url: git_push_path, method: :post, local: true, class: "space-y-4" do |form| %>
+    <div>
+      <%= submit_tag "Push to Remote", class: "px-4 py-2 bg-green-600 text-white text-sm font-medium rounded-md shadow hover:bg-green-700 focus:outline-none" %>
+    </div>
+  <% end %>
+</div>
+

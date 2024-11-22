@@ -11,4 +11,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  get 'git_operations', to: 'git_operations#index'
+  post 'git/commit', to: 'git_operations#commit'
+  post 'git/push', to: 'git_operations#push'
 end

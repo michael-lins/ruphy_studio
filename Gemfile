@@ -51,6 +51,8 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem 'dotenv-rails', groups: [:development, :test]
 end
 
 group :development do
@@ -69,3 +71,9 @@ gem "ruby_ui", "~> 1.0.0.pre.alpha.4"
 gem "phlex-rails", "~> 1.2.1"
 
 gem "tailwind_merge", "~> 0.13.2"
+
+gem "rugged", "~> 1.7"
+
+gem 'importmap-rails'
+
+gem 'cssbundling-rails'
