@@ -73,7 +73,3 @@ gem "phlex-rails", "~> 1.2.1"
 gem "tailwind_merge", "~> 0.13.2"
 
 gem "rugged", "~> 1.7"
-
-gem 'importmap-rails'
-
-gem 'cssbundling-rails'
