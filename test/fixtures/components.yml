@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  component_type: MyString
+  x: 1
+  'y': 1
+  project: one
+
+two:
+  component_type: MyString
+  x: 1
+  'y': 1
+  project: two

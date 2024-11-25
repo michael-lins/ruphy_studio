@@ -7,3 +7,4 @@ pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 pin "tailwindcss-animate" # @1.0.7
 pin "tailwindcss/plugin", to: "tailwindcss--plugin.js" # @3.4.15
+pin "interactjs" # @1.10.27
