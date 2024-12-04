@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulated Borderless Window</title>
+  <title>Fullscreen Modal</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
+      overflow: hidden; /* Prevent body scroll when modal is active */
     }
     #modal {
       position: fixed;
@@ -24,13 +25,23 @@
       padding: 10px;
       background-color: #333;
       color: white;
-      font-size: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     #modal-content {
       padding: 20px;
+      height: calc(100vh - 40px); /* Header height adjustment */
+      overflow: auto;
     }
     #close-modal {
-      float: right;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 16px;
+    }
+    #fullscreen-toggle {
       cursor: pointer;
       background: none;
       border: none;
@@ -40,25 +51,50 @@
   </style>
 </head>
 <body>
-  <button onclick="showModal()">Open Modal</button>
+  <button onclick="showModal()">Open Fullscreen Modal</button>
 
   <div id="modal">
     <div id="modal-header">
-      <button id="close-modal" onclick="closeModal()">✖</button>
-      Modal Header
+      <span>Modal Header</span>
+      <div>
+        <button id="fullscreen-toggle" onclick="toggleFullscreen()">🔳 Fullscreen</button>
+        <button id="close-modal" onclick="closeModal()">✖ Close</button>
+      </div>
     </div>
     <div id="modal-content">
-      <h1>Simulated Window</h1>
-      <p>This is a full-screen modal acting as a borderless window!</p>
+      <h1>Simulated Fullscreen Window</h1>
+      <p>This is a full-screen modal that can also go into true fullscreen mode!</p>
     </div>
   </div>
 
   <script>
+    // Show modal
     function showModal() {
       document.getElementById('modal').style.display = 'block';
     }
+
+    // Close modal
     function closeModal() {
       document.getElementById('modal').style.display = 'none';
+      exitFullscreen();
+    }
+
+    // Toggle browser fullscreen mode
+    function toggleFullscreen() {
+      const modal = document.getElementById('modal');
+      if (!document.fullscreenElement) {
+        modal.requestFullscreen()
+          .catch(err => console.error(`Error attempting to enable fullscreen: ${err}`));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    // Exit fullscreen mode
+    function exitFullscreen() {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
     }
   </script>
 </body>
