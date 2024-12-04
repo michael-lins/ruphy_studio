@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "builder", to: 'builder#index'
+  get "borderless", to: 'builder#borderless'
 
   resources :builder, only: [:index] do
     collection do
