@@ -5,6 +5,9 @@ class BuilderController < ApplicationController
   def borderless
   end
 
+  def cube
+  end
+
   def save
     # Save the dropped components' data to the database or session
     session[:layout] = params[:layout]

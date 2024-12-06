@@ -3,99 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fullscreen Modal</title>
+  <title>Ruphy Studio</title>
   <style>
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      overflow: hidden; /* Prevent body scroll when modal is active */
+      background: #f4f4f9;
+      overflow: hidden;
     }
+    #projects-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #projects-page button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+    }
+
+    /* Top Bar */
+    #top-bar {
+      height: 50px;
+      background-color: #333;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 9999;
+    }
+
+    #top-bar button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* Bottom Bar */
+    #bottom-bar {
+      height: 10px;
+      background-color: #666;
+      color: white;
+      text-align: center;
+      line-height: 10px;
+      font-size: 10px;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    }
+
+    /* Modal Styling */
     #modal {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background-color: #ffffff;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      z-index: 9999;
-      display: none; /* Hide initially */
-    }
-    #modal-header {
-      padding: 10px;
-      background-color: #333;
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    #modal-content {
-      padding: 20px;
-      height: calc(100vh - 40px); /* Header height adjustment */
-      overflow: auto;
+      background: #fff;
+      z-index: 9998;
+      display: none;
     }
     #close-modal {
-      cursor: pointer;
+      position: absolute;
+      top: 10px;
+      left: 20px;
       background: none;
       border: none;
-      color: white;
-      font-size: 16px;
-    }
-    #fullscreen-toggle {
+      font-size: 18px;
       cursor: pointer;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 16px;
     }
+
+    /* 3D Cube Container */
+    #cube-container {
+      position: relative;
+      width: 100%;
+      height: calc(100vh - 50px); /* Full height minus top and bottom bars */
+      margin: 0;
+      perspective: 1200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* The Cube */
+    #cube {
+      width: 130vmin;
+      height: 90vmin;
+      position: absolute;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(0deg);
+      transition: transform 1s ease-in-out;
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #ececec;
+      border: 2px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    }
+
+    /* Position Faces */
+    .face-front  { transform: rotateY(  0deg) translateZ(45vmin); }
+    .face-back   { transform: rotateY(180deg) translateZ(45vmin); }
+    .face-left   { transform: rotateY(-90deg) translateZ(45vmin); }
+    .face-right  { transform: rotateY( 90deg) translateZ(45vmin); }
+    .face-top    { transform: rotateX( 90deg) translateZ(45vmin); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(45vmin); }
   </style>
 </head>
 <body>
-  <button onclick="showModal()">Open Fullscreen Modal</button>
+  <!-- Projects Page -->
+  <div id="projects-page">
+    <h1>Welcome to Ruphy Studio</h1>
+    <button onclick="openModal()">Open Project Editor</button>
+  </div>
 
+  <!-- Modal -->
   <div id="modal">
-    <div id="modal-header">
-      <span>Modal Header</span>
-      <div>
-        <button id="fullscreen-toggle" onclick="toggleFullscreen()">🔳 Fullscreen</button>
-        <button id="close-modal" onclick="closeModal()">✖ Close</button>
+    <button id="close-modal" onclick="closeModal()">← Close</button>
+    <div id="cube-container">
+      <div id="cube">
+        <div class="cube-face face-front">Model Designer</div>
+        <div class="cube-face face-back">View Creator</div>
+        <div class="cube-face face-left">Route Designer</div>
+        <div class="cube-face face-right">Settings</div>
+        <div class="cube-face face-top">Other Tools</div>
+        <div class="cube-face face-bottom">Help</div>
       </div>
-    </div>
-    <div id="modal-content">
-      <h1>Simulated Fullscreen Window</h1>
-      <p>This is a full-screen modal that can also go into true fullscreen mode!</p>
     </div>
   </div>
 
   <script>
-    // Show modal
-    function showModal() {
+    let currentX = 0;
+    let currentY = 0;
+
+    function openModal() {
       document.getElementById('modal').style.display = 'block';
     }
 
-    // Close modal
     function closeModal() {
       document.getElementById('modal').style.display = 'none';
-      exitFullscreen();
     }
 
-    // Toggle browser fullscreen mode
-    function toggleFullscreen() {
-      const modal = document.getElementById('modal');
-      if (!document.fullscreenElement) {
-        modal.requestFullscreen()
-          .catch(err => console.error(`Error attempting to enable fullscreen: ${err}`));
-      } else {
-        document.exitFullscreen();
-      }
+    function rotateCube(direction) {
+      if (direction === 'left') currentY -= 90;
+      if (direction === 'right') currentY += 90;
+      if (direction === 'up') currentX -= 90;
+      if (direction === 'down') currentX += 90;
+
+      document.getElementById('cube').style.transform = 
+        `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
     }
 
-    // Exit fullscreen mode
-    function exitFullscreen() {
-      if (document.fullscreenElement) {
-        document.exitFullscreen();
-      }
-    }
+    // Add keyboard navigation for cube rotation
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') rotateCube('left');
+      if (event.key === 'ArrowRight') rotateCube('right');
+      if (event.key === 'ArrowUp') rotateCube('up');
+      if (event.key === 'ArrowDown') rotateCube('down');
+    });
   </script>
 </body>
 </html>

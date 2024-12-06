@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruphy Studio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      overflow: hidden;
+    }
+
+    /* Ruphy Main Page */
+    #projects-page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: #f4f4f9;
+    }
+
+    #projects-page h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    #projects-page button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    /* Modal Styling */
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #fff;
+      z-index: 9999;
+      display: none;
+      flex-direction: column;
+    }
+
+    /* Top and Bottom Bars */
+    #top-bar, #bottom-bar {
+      height: 50px;
+      background: #4caf50;
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+    }
+
+    #bottom-bar {
+      justify-content: center;
+    }
+
+    #close-modal {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    /* 3D Cube Container */
+    #cube-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: calc(100vmin * 1.5);
+      overflow: hidden;
+    }
+
+    /* Cube */
+    #cube {
+      width: 110vmin;
+      height: 110vmin;
+      transform-style: preserve-3d;
+      transform: rotateX(0deg) rotateY(0deg);
+      transition: transform 1s ease-in-out;
+    }
+
+    .cube-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      border: 2px solid #ccc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Positioning Faces */
+    .face-front  { transform: rotateY(  0deg) translateZ(55vmin); background: rgba(255, 153, 153, 0.8); }
+    .face-back   { transform: rotateY(180deg) translateZ(55vmin); background: rgba(153, 204, 255, 0.8); }
+    .face-left   { transform: rotateY(-90deg) translateZ(55vmin); background: rgba(153, 255, 153, 0.8); }
+    .face-right  { transform: rotateY( 90deg) translateZ(55vmin); background: rgba(255, 255, 153, 0.8); }
+    .face-top    { transform: rotateX( 90deg) translateZ(55vmin); background: rgba(255, 204, 153, 0.8); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(55vmin); background: rgba(204, 153, 255, 0.8); }
+  </style>
+
+  <style>
+    /* Bottom Bar Styling */
+    #bottom-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #4caf50;
+      color: white;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    #bottom-bar span {
+      margin-right: 20px;
+    }
+
+    /* Tooltip Styling */
+    .memory-tooltip {
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      border-radius: 8px;
+      padding: 10px 15px;
+      position: absolute;
+      bottom: 70px; /* Above the bottom bar */
+      right: 20px; /* Aligned to the right */
+      display: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      z-index: 1000;
+      font-size: 14px;
+    }
+
+    .memory-tooltip.active {
+      display: block;
+    }
+
+    .tooltip-trigger {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    /* Tooltip Arrow */
+    .memory-tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 20px;
+      border-width: 8px;
+      border-style: solid;
+      border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+    }
+  </style>
+</head>
+<body>
+  <!-- Ruphy Main Page -->
+  <div id="projects-page">
+    <h1>Welcome to Ruphy Studio</h1>
+    <button onclick="openModal()">Open Project Editor</button>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal">
+    <!-- Top Bar -->
+    <div id="top-bar">
+      <button id="close-modal" onclick="closeModal()">← Back</button>
+      <span>Project Editor</span>
+    </div>
+
+    <!-- Cube Container -->
+    <div id="cube-container">
+      <div id="cube">
+        <div class="cube-face face-front">
+          <h2>Model Designer</h2>
+          <form>
+            <label for="model-name">Model Name:</label>
+            <input type="text" id="model-name" placeholder="Enter model name">
+          </form>
+        </div>
+        <div class="cube-face face-back">
+          <h2>View Creator</h2>
+          <p>Drag and drop elements to design views.</p>
+        </div>
+        <div class="cube-face face-left">
+          <h2>Route Designer</h2>
+          <form>
+            <label for="route">Add Route:</label>
+            <input type="text" id="route" placeholder="Enter route path">
+          </form>
+        </div>
+        <div class="cube-face face-right">
+          <h2>Settings</h2>
+          <p>Customize application preferences.</p>
+        </div>
+        <div class="cube-face face-top">
+          <h2>Other Tools</h2>
+          <p>Integrate additional functionalities.</p>
+        </div>
+        <div class="cube-face face-bottom">
+          <h2>Help</h2>
+          <p>Find documentation and support options.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div id="bottom-bar">
+      <span>Use arrow keys to navigate through tools</span>
+      <span class="tooltip-trigger" onclick="toggleTooltip()">Memory Usage</span>
+    </div>
+    <div class="memory-tooltip" id="memory-tooltip"></div>
+
+  </div>
+
+  <script>
+    let currentX = 0;
+    let currentY = 0;
+
+    function openModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modal').style.display = 'none';
+    }
+
+    function rotateCube(direction) {
+      if (direction === 'left') currentY -= 90;
+      if (direction === 'right') currentY += 90;
+      if (direction === 'up') currentX -= 90;
+      if (direction === 'down') currentX += 90;
+
+      document.getElementById('cube').style.transform =
+        `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowLeft') rotateCube('left');
+      if (event.key === 'ArrowRight') rotateCube('right');
+      if (event.key === 'ArrowUp') rotateCube('up');
+      if (event.key === 'ArrowDown') rotateCube('down');
+    });
+  </script>
+
+  <script>
+    async function updateResourceUsage() {
+      const tooltip = document.getElementById('memory-tooltip');
+
+      // Get resource stats
+      const resources = performance.getEntriesByType('resource');
+      const totalResources = resources.length;
+      const totalSize = resources.reduce((acc, resource) => acc + (resource.transferSize || 0), 0);
+      const scriptsCount = resources.filter(res => res.initiatorType === 'script').length;
+      const stylesCount = resources.filter(res => res.initiatorType === 'link').length;
+      const imagesCount = resources.filter(res => res.initiatorType === 'img').length;
+
+      // Get DOM stats
+      const domNodes = document.getElementsByTagName('*').length;
+
+      // Get event listener count (modern browsers with `getEventListeners`)
+      let eventListeners = 0;
+      if (window.getEventListeners) {
+        const allElements = document.querySelectorAll('*');
+        for (const el of allElements) {
+          const listeners = window.getEventListeners(el);
+          eventListeners += Object.values(listeners).flat().length;
+        }
+      }
+
+      // Custom object size estimation
+      const customData = { name: 'Test', items: Array(100).fill(0) }; // Example object
+      const customDataSize = roughSizeOfObject(customData);
+
+      // Update tooltip content
+      tooltip.innerHTML = `
+        <strong>Resource Stats:</strong><br>
+        Total Resources: ${totalResources}<br>
+        Transferred: ${(totalSize / 1024).toFixed(2)} KB<br>
+        Scripts: ${scriptsCount}, Styles: ${stylesCount}, Images: ${imagesCount}<br><br>
+        <strong>DOM Stats:</strong><br>
+        DOM Nodes: ${domNodes}<br>
+        Event Listeners: ${eventListeners || 'N/A'}<br><br>
+        <strong>Custom Data:</strong><br>
+        Approx Size: ${customDataSize} bytes
+      `;
+    }
+
+    function roughSizeOfObject(object) {
+      const objectList = new WeakSet();
+      const stack = [object];
+      let bytes = 0;
+
+      while (stack.length) {
+        const value = stack.pop();
+
+        if (typeof value === 'boolean') {
+          bytes += 4;
+        } else if (typeof value === 'string') {
+          bytes += value.length * 2;
+        } else if (typeof value === 'number') {
+          bytes += 8;
+        } else if (typeof value === 'object' && value !== null && !objectList.has(value)) {
+          objectList.add(value);
+          for (const i in value) stack.push(value[i]);
+        }
+      }
+      return bytes;
+    }
+
+    // Toggle tooltip visibility
+    function toggleTooltip() {
+      const tooltip = document.getElementById('memory-tooltip');
+      tooltip.classList.toggle('active');
+    }
+
+    // Update every second
+    setInterval(updateResourceUsage, 1000);
+  </script>
+
+</body>
+</html>
