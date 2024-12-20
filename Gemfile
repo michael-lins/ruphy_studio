@@ -70,6 +70,6 @@ gem "ruby_ui", "~> 1.0.0.pre.alpha.4"
 
 gem "phlex-rails", "~> 1.2.1"
 
-gem "tailwind_merge", "~> 0.13.2"
+gem "tailwind_merge", "~> 0.14.0"
 
 gem "rugged", "~> 1.7"
