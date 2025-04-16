@@ -66,10 +66,10 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "ruby_ui", "~> 1.0.0.pre.alpha.4"
-
 gem "phlex-rails", "~> 1.2.1"
 
 gem "tailwind_merge", "~> 0.13.2"
 
 gem "rugged", "~> 1.7"
+
+gem "ruby_ui", "~> 1.0.0.pre.alpha.4", :group => :development, :require => false

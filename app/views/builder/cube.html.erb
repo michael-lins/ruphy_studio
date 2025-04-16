@@ -12,7 +12,7 @@
       overflow: hidden;
     }
 
-    /* Ruphy Main Page */
+    /* Projects Page */
     #projects-page {
       display: flex;
       flex-direction: column;
@@ -37,7 +37,7 @@
       cursor: pointer;
     }
 
-    /* Modal Styling */
+    /* Modal */
     #modal {
       position: fixed;
       top: 0;
@@ -50,18 +50,13 @@
       flex-direction: column;
     }
 
-    /* Top and Bottom Bars */
-    #top-bar, #bottom-bar {
+    #top-bar {
       height: 50px;
       background: #4caf50;
       color: white;
       display: flex;
       align-items: center;
       padding: 0 20px;
-    }
-
-    #bottom-bar {
-      justify-content: center;
     }
 
     #close-modal {
@@ -84,8 +79,8 @@
 
     /* Cube */
     #cube {
-      width: 110vmin;
-      height: 110vmin;
+      width: 60.5%;
+      height: 60.5%;
       transform-style: preserve-3d;
       transform: rotateX(0deg) rotateY(0deg);
       transition: transform 1s ease-in-out;
@@ -93,6 +88,7 @@
 
     .cube-face {
       position: absolute;
+      float: right;
       width: 100%;
       height: 100%;
       background: rgba(255, 255, 255, 0.8);
@@ -107,75 +103,78 @@
     }
 
     /* Positioning Faces */
-    .face-front  { transform: rotateY(  0deg) translateZ(55vmin); background: rgba(255, 153, 153, 0.8); }
-    .face-back   { transform: rotateY(180deg) translateZ(55vmin); background: rgba(153, 204, 255, 0.8); }
-    .face-left   { transform: rotateY(-90deg) translateZ(55vmin); background: rgba(153, 255, 153, 0.8); }
-    .face-right  { transform: rotateY( 90deg) translateZ(55vmin); background: rgba(255, 255, 153, 0.8); }
-    .face-top    { transform: rotateX( 90deg) translateZ(55vmin); background: rgba(255, 204, 153, 0.8); }
-    .face-bottom { transform: rotateX(-90deg) translateZ(55vmin); background: rgba(204, 153, 255, 0.8); }
-  </style>
+    .face-front  { transform: rotateY(  0deg) translateZ(60vmin); background: rgba(255, 153, 153, 0.6); }
+    .face-back   { transform: rotateY(180deg) translateZ(60vmin); background: rgba(153, 204, 255, 0.6); }
+    .face-left   { transform: rotateY(-90deg) translateZ(60vmin); background: rgba(153, 255, 153, 0.6); }
+    .face-right  { transform: rotateY( 90deg) translateZ(60vmin); background: rgba(255, 255, 153, 0.6); }
+    .face-top    { transform: rotateX( 90deg) translateZ(60vmin); background: rgba(255, 204, 153, 0.6); }
+    .face-bottom { transform: rotateX(-90deg) translateZ(60vmin); background: rgba(204, 153, 255, 0.6); }
 
-  <style>
-    /* Bottom Bar Styling */
-    #bottom-bar {
+    /* Radial Menu */
+    .radial-menu {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #4caf50;
-      color: white;
-      font-family: Arial, sans-serif;
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 20px;
-      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    }
-
-    #bottom-bar span {
-      margin-right: 20px;
-    }
-
-    /* Tooltip Styling */
-    .memory-tooltip {
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      border-radius: 8px;
-      padding: 10px 15px;
-      position: absolute;
-      bottom: 70px; /* Above the bottom bar */
-      right: 20px; /* Aligned to the right */
-      display: none;
-      white-space: nowrap;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-      z-index: 1000;
-      font-size: 14px;
-    }
-
-    .memory-tooltip.active {
-      display: block;
-    }
-
-    .tooltip-trigger {
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    /* Tooltip Arrow */
-    .memory-tooltip::after {
-      content: '';
-      position: absolute;
-      top: 100%;
+      bottom: 20px;
       right: 20px;
-      border-width: 8px;
-      border-style: solid;
-      border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.2);
+      transition: opacity 0.3s ease-in-out, transform 0.5s ease;
+      z-index: 9999;
+      cursor: grab;
+    }
+
+    .menu-center {
+      width: 50px;
+      height: 50px;
+      background: #ff5555;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      opacity: 0.8;
+    }
+
+    .menu-item {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #4caf50;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transform: scale(0);
+      opacity: 0;
+      transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+    }
+
+    .menu-item.visible {
+      transform: scale(1);
+      opacity: 1;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .menu-item:hover {
+      box-shadow: 0 0 10px rgba(255, 255, 255, 1);
     }
   </style>
 </head>
 <body>
-  <!-- Ruphy Main Page -->
+  <!-- Projects Page -->
   <div id="projects-page">
     <h1>Welcome to Ruphy Studio</h1>
     <button onclick="openModal()">Open Project Editor</button>
@@ -192,46 +191,25 @@
     <!-- Cube Container -->
     <div id="cube-container">
       <div id="cube">
-        <div class="cube-face face-front">
-          <h2>Model Designer</h2>
-          <form>
-            <label for="model-name">Model Name:</label>
-            <input type="text" id="model-name" placeholder="Enter model name">
-          </form>
-        </div>
-        <div class="cube-face face-back">
-          <h2>View Creator</h2>
-          <p>Drag and drop elements to design views.</p>
-        </div>
-        <div class="cube-face face-left">
-          <h2>Route Designer</h2>
-          <form>
-            <label for="route">Add Route:</label>
-            <input type="text" id="route" placeholder="Enter route path">
-          </form>
-        </div>
-        <div class="cube-face face-right">
-          <h2>Settings</h2>
-          <p>Customize application preferences.</p>
-        </div>
-        <div class="cube-face face-top">
-          <h2>Other Tools</h2>
-          <p>Integrate additional functionalities.</p>
-        </div>
-        <div class="cube-face face-bottom">
-          <h2>Help</h2>
-          <p>Find documentation and support options.</p>
-        </div>
+        <div class="cube-face face-front">Front</div>
+        <div class="cube-face face-back">Back</div>
+        <div class="cube-face face-left">Left</div>
+        <div class="cube-face face-right">Right</div>
+        <div class="cube-face face-top">Top</div>
+        <div class="cube-face face-bottom">Bottom</div>
       </div>
     </div>
 
-    <!-- Bottom Bar -->
-    <div id="bottom-bar">
-      <span>Use arrow keys to navigate through tools</span>
-      <span class="tooltip-trigger" onclick="toggleTooltip()">Memory Usage</span>
+    <!-- Radial Menu -->
+    <div class="radial-menu" id="radial-menu">
+      <div class="menu-center">Rails</div>
+      <div class="menu-item" data-face="front">Ruby UI View</div>
+      <div class="menu-item" data-face="back">Models</div>
+      <div class="menu-item" data-face="left">Controllers</div>
+      <div class="menu-item" data-face="right">Gems</div>
+      <div class="menu-item" data-face="top">Routes</div>
+      <div class="menu-item" data-face="bottom">Help</div>
     </div>
-    <div class="memory-tooltip" id="memory-tooltip"></div>
-
   </div>
 
   <script>
@@ -246,98 +224,96 @@
       document.getElementById('modal').style.display = 'none';
     }
 
-    function rotateCube(direction) {
-      if (direction === 'left') currentY -= 90;
-      if (direction === 'right') currentY += 90;
-      if (direction === 'up') currentX -= 90;
-      if (direction === 'down') currentX += 90;
+    function toggleMenu() {
+      const items = document.querySelectorAll('.menu-item');
+      const menu = document.getElementById('radial-menu');
 
-      document.getElementById('cube').style.transform =
-        `rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+      const rect = menu.getBoundingClientRect();
+      if (rect.left < 100) menu.style.left = "100px";
+      if (rect.top < 100) menu.style.top = "100px";
+      if (window.innerWidth - rect.right < 100) menu.style.left = `${window.innerWidth - 100 - rect.width}px`;
+      if (window.innerHeight - rect.bottom < 100) menu.style.top = `${window.innerHeight - 100 - rect.height}px`;
+
+      const menuVisible = items[0].classList.contains('visible');
+
+      if (!menuVisible) {
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.transform = `rotate(${index * 60}deg) translate(80px) rotate(${-index * 60}deg)`;
+            item.classList.add('visible');
+          }, index * 100);
+        });
+      } else {
+        items.forEach((item, index) => {
+          setTimeout(() => {
+            item.style.transform = `rotate(${index * 60}deg) translate(0px) rotate(${-index * 60}deg)`;
+            item.classList.remove('visible');
+          }, index * 100);
+        });
+      }
     }
 
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowLeft') rotateCube('left');
-      if (event.key === 'ArrowRight') rotateCube('right');
-      if (event.key === 'ArrowUp') rotateCube('up');
-      if (event.key === 'ArrowDown') rotateCube('down');
+    function rotateCubeToFace(face) {
+      const cube = document.getElementById('cube');
+      const rotations = {
+        front: { x: 0, y: 0 },
+        back: { x: 0, y: 180 },
+        left: { x: 0, y: -90 },
+        right: { x: 0, y: 90 },
+        top: { x: -90, y: 0 },
+        bottom: { x: 90, y: 0 },
+      };
+
+      const { x, y } = rotations[face];
+      currentX = x;
+      currentY = y;
+
+      cube.style.transform = `rotateX(${x}deg) rotateY(${y}deg)`;
+    }
+
+    document.querySelectorAll('.menu-item').forEach((item) => {
+      item.addEventListener('click', () => {
+        const face = item.dataset.face;
+        rotateCubeToFace(face);
+      });
+    });
+
+    // Make the radial menu draggable
+    const radialMenu = document.getElementById("radial-menu");
+    let isDragging = false;
+    let startX, startY;
+
+    radialMenu.addEventListener("click", (e) => {
+      if (isDragging) {
+        // Prevent click behavior if it was a drag
+        e.preventDefault();
+        e.stopPropagation();
+      } else {
+        // Proceed with click behavior
+        toggleMenu();
+        e.stopPropagation();
+      }
+    });
+
+    radialMenu.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      startX = e.clientX - radialMenu.offsetLeft;
+      startY = e.clientY - radialMenu.offsetTop;
+      radialMenu.style.cursor = "grabbing";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!isDragging) return;
+      const x = e.clientX - startX;
+      const y = e.clientY - startY;
+      radialMenu.style.left = `${x}px`;
+      radialMenu.style.top = `${y}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+      isDragging = false;
+      radialMenu.style.cursor = "grab";
     });
   </script>
-
-  <script>
-    async function updateResourceUsage() {
-      const tooltip = document.getElementById('memory-tooltip');
-
-      // Get resource stats
-      const resources = performance.getEntriesByType('resource');
-      const totalResources = resources.length;
-      const totalSize = resources.reduce((acc, resource) => acc + (resource.transferSize || 0), 0);
-      const scriptsCount = resources.filter(res => res.initiatorType === 'script').length;
-      const stylesCount = resources.filter(res => res.initiatorType === 'link').length;
-      const imagesCount = resources.filter(res => res.initiatorType === 'img').length;
-
-      // Get DOM stats
-      const domNodes = document.getElementsByTagName('*').length;
-
-      // Get event listener count (modern browsers with `getEventListeners`)
-      let eventListeners = 0;
-      if (window.getEventListeners) {
-        const allElements = document.querySelectorAll('*');
-        for (const el of allElements) {
-          const listeners = window.getEventListeners(el);
-          eventListeners += Object.values(listeners).flat().length;
-        }
-      }
-
-      // Custom object size estimation
-      const customData = { name: 'Test', items: Array(100).fill(0) }; // Example object
-      const customDataSize = roughSizeOfObject(customData);
-
-      // Update tooltip content
-      tooltip.innerHTML = `
-        <strong>Resource Stats:</strong><br>
-        Total Resources: ${totalResources}<br>
-        Transferred: ${(totalSize / 1024).toFixed(2)} KB<br>
-        Scripts: ${scriptsCount}, Styles: ${stylesCount}, Images: ${imagesCount}<br><br>
-        <strong>DOM Stats:</strong><br>
-        DOM Nodes: ${domNodes}<br>
-        Event Listeners: ${eventListeners || 'N/A'}<br><br>
-        <strong>Custom Data:</strong><br>
-        Approx Size: ${customDataSize} bytes
-      `;
-    }
-
-    function roughSizeOfObject(object) {
-      const objectList = new WeakSet();
-      const stack = [object];
-      let bytes = 0;
-
-      while (stack.length) {
-        const value = stack.pop();
-
-        if (typeof value === 'boolean') {
-          bytes += 4;
-        } else if (typeof value === 'string') {
-          bytes += value.length * 2;
-        } else if (typeof value === 'number') {
-          bytes += 8;
-        } else if (typeof value === 'object' && value !== null && !objectList.has(value)) {
-          objectList.add(value);
-          for (const i in value) stack.push(value[i]);
-        }
-      }
-      return bytes;
-    }
-
-    // Toggle tooltip visibility
-    function toggleTooltip() {
-      const tooltip = document.getElementById('memory-tooltip');
-      tooltip.classList.toggle('active');
-    }
-
-    // Update every second
-    setInterval(updateResourceUsage, 1000);
-  </script>
-
 </body>
 </html>
