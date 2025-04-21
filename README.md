@@ -1,13 +1,69 @@
-# Ruphy Studio &trade;
-> ### _Drag and Drop your Rails project from Idea to IPO_
+# Ruphy
 
-Ruphy Studio &trade; is a Rapid Application Development (RAD) platform for Ruby on Rails projects with a [Delphi](https://en.wikipedia.org/wiki/History_of_Delphi_(software)) experience flavor in mind. This is simply my love letter for myself (my 20-years-ago self).
+Rails is great, but building apps still feels a bit old. Scaffolds are cold. Generators don’t care about what the user sees.  
+**Ruphy** is my answer to that.
 
-## Main Goal
-> ### _That's the goal: to keep the wheel running from a new perspective, not reinventing it._
+It’s a Rails assistant that launches with your app, shows up inside your browser, and helps you build your UI first—then connect it to the backend.  
+No setup, no configs. Just flow.
 
-The idea is to allow Ruby on Rails projects to be created from scratch (and attach them to remote Git repositories) and provide a new Drag and Drop experience to build WYSIWYG views using [Ruby UI](https://github.com/ruby-ui/ruby_ui) [components](https://rubyui.com/docs/introduction).
+---
 
-Users will also check their work using the Live Preview feature to later on deploy it to a remote server using [Kamal](https://kamal-deploy.org).
+## What It Is
 
-We'll leverage experience with [Hotwire](https://hotwired.dev) to boost the UX with innovative and impactful approaches for developers (or just my) happiness. 
+- A small Electron launcher that starts your Rails 8 app
+- Opens your browser and adds **Ruphino**, a small dog icon
+- You click Ruphino and see a radial menu with UI elements
+- You can drop these into your page and later connect them to controllers/models
+- No React, no webpack—only Rails, Hotwire, and Solid Queue
+
+---
+
+## Who It’s For
+
+- New Rails devs who want to see things working quickly
+- Solo devs building ideas fast
+- People who want to learn Rails by seeing and doing
+- Devs who miss the fun of making things visually
+
+---
+
+## What Works Today
+
+- Rails 8 app starts from Electron
+- Ruphino appears inside the browser
+- Radial menu shows up with test components
+- Some UI elements can be inserted (basic and static for now)
+- Rails + Hotwire + Solid Queue setup is running
+
+---
+
+## What’s Coming Next
+
+- Add form and list UI components that connect to real models
+- Pick a model and choose which controller/action to link
+- Save assistant state between sessions
+- Improve menu with shortcuts and helpers
+
+---
+
+## Why I’m Building This
+
+Because Rails can be easier for beginners.  
+Because starting from the UI helps people learn faster.  
+Because building things should feel fun again.
+
+And because I’ve been using Rails since 2007 for study and side projects, and professionally since 2018.  
+I know it well, and I believe we can make it better.
+
+---
+
+## License
+
+MIT — free to use, change, and build on.
+
+---
+
+## About Me
+
+Michael Lins  
+[LinkedIn](https://linkedin.com/in/michael-lins) 
