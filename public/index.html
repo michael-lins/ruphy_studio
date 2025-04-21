@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ruphino Landed</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #121212;
+      color: #fff;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #ruphino-landing {
+      width: 48px;
+      height: 48px;
+      background: url('./ruphino.png') no-repeat center;
+      background-size: cover;
+      animation: pop 0.6s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes pop {
+      0%   { transform: scale(0.5); opacity: 0; }
+      80%  { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div id="ruphino-landing"></div>
+  <h1>Ruphino has landed.</h1>
+</body>
+</html>
