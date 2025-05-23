@@ -1,18 +1,29 @@
-const { invoke } = window.__TAURI__.core;
+import { onRuphinoClick } from './scripts/ruphino.events.js';
 
-let greetInputEl;
-let greetMsgEl;
+window.addEventListener('DOMContentLoaded', () => {
+  const ruphino = document.getElementById("ruphino");
+  let isDragging = false;
 
-async function greet() {
-  // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-  greetMsgEl.textContent = await invoke("greet", { name: greetInputEl.value });
-}
+  ruphino.addEventListener('mousedown', async (e) => {
+    const onMouseMove = (eMove) => {
+      isDragging = true;
+    };
 
-window.addEventListener("DOMContentLoaded", () => {
-  greetInputEl = document.querySelector("#greet-input");
-  greetMsgEl = document.querySelector("#greet-msg");
-  document.querySelector("#greet-form").addEventListener("submit", (e) => {
-    e.preventDefault();
-    greet();
+    const onMouseUp = () => {
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+    };
+
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  });
+
+  ruphino.addEventListener("click", (e) => {
+    console.log("🔥 CLICK FIRED 🔥", isDragging);
+    if (isDragging) {
+      e.preventDefault(); // Cancel accidental drag-click
+      return;
+    }
+    onRuphinoClick(); // Only runs if not dragged
   });
 });

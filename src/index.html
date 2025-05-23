@@ -11,7 +11,7 @@
     -webkit-app-region: drag;
   }
 
-  #circle {
+  #ruphino {
     width: 48px;
     height: 48px;
     background-image: url('/public/ruphino_128x128.png');
@@ -23,35 +23,15 @@
     position: absolute;
     top: 0;
     left: 0;
+    cursor: pointer;
+    outline: 2px solid red; /* debug */
+    z-index: 9999;
+    pointer-events: auto;
   }
 </style>
+<script type="module" src="main.js"></script>
 </head>
 <body>
-  <div id="circle" data-tauri-drag-region></div>
-
-<script>
-  const { appWindow } = window.__TAURI__.window;
-
-  const circle = document.getElementById('circle');
-  let isDragging = false;
-  let startX, startY;
-
-  circle.addEventListener('mousedown', async (e) => {
-    isDragging = true;
-    const position = await appWindow.innerPosition();
-    startX = e.screenX - position.x;
-    startY = e.screenY - position.y;
-  });
-
-  window.addEventListener('mouseup', () => isDragging = false);
-
-  window.addEventListener('mousemove', (e) => {
-    if (!isDragging) return;
-    appWindow.setPosition({
-      x: e.screenX - startX,
-      y: e.screenY - startY
-    });
-  });
-</script>
+  <div id="ruphino" data-tauri-drag-region></div>
 </body>
 </html>
