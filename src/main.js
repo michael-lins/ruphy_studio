@@ -19,11 +19,11 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   ruphino.addEventListener("click", (e) => {
-    console.log("🔥 CLICK FIRED 🔥", isDragging);
     if (isDragging) {
       e.preventDefault(); // Cancel accidental drag-click
       return;
     }
+    console.log("🔥 CLICK FIRED 🔥", isDragging);
     onRuphinoClick(); // Only runs if not dragged
   });
 });

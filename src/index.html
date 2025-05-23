@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Ruphy Studio</title>
-<style>
-  html, body {
-    margin: 0;
-    padding: 0;
-    //background: transparent;
-    -webkit-app-region: drag;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruphy Studio</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      //background: transparent;
+      -webkit-app-region: drag;
+    }
 
-  #ruphino {
-    width: 48px;
-    height: 48px;
-    background-image: url('/public/ruphino_128x128.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-radius: 50%;
-    -webkit-app-region: drag;
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    outline: 2px solid red; /* debug */
-    z-index: 9999;
-    pointer-events: auto;
-  }
-</style>
-<script type="module" src="main.js"></script>
+    #ruphino {
+      width: 48px;
+      height: 48px;
+      background-image: url('ruphino_128x128.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 50%;
+      -webkit-app-region: drag;
+      position: absolute;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+      outline: 2px solid red; /* debug */
+      z-index: 9999;
+      pointer-events: auto;
+    }
+  </style>
 </head>
 <body>
   <div id="ruphino" data-tauri-drag-region></div>
+  <script type="module" src="/main.js"></script>
 </body>
 </html>
