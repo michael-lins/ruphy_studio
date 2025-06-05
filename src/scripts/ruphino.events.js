@@ -13,17 +13,14 @@ export async function onRuphinoClick() {
 
     const projectName = "ruphy_app";
 
-    try {
-        const result = await invoke('create_and_run_project', {
-          projectName,
-          path: folder
-        });
-        console.log("invoke result:", result);
-    } catch (err) {
-        console.error("invoke failed:", err);
-    }
+    const result = await invoke('create_and_run_project', {
+      projectName,
+      path: folder
+    });
 
+    console.log("invoke result:", result);
     console.log("🚀 Rails app created and running at http://localhost:3000");
+
   } catch (err) {
     console.error("🐶 Ruphino failed:", err);
   }
