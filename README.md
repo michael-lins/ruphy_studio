@@ -1,7 +1,13 @@
-# Tauri + Vanilla
+# Ruphy Studio &trade;
+> ### _Drag and Drop your Rails project from Idea to IPO_
 
-This template should help get you started developing with Tauri in vanilla HTML, CSS and Javascript.
+Ruphy Studio &trade; is a Rapid Application Development (RAD) platform for Ruby on Rails projects with a [Delphi](https://en.wikipedia.org/wiki/History_of_Delphi_(software)) experience flavor in mind. This is simply my love letter for myself (my 20-years-ago self).
 
-## Recommended IDE Setup
+## Main Goal
+> ### _That's the goal: to keep the wheel running from a new perspective, not reinventing it._
 
-- [VS Code](https://code.visualstudio.com/) + [Tauri](https://marketplace.visualstudio.com/items?itemName=tauri-apps.tauri-vscode) + [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer)
+The idea is to allow Ruby on Rails projects to be created from scratch (and attach them to remote Git repositories) and provide a new Drag and Drop experience to build WYSIWYG views using [Ruby UI](https://github.com/ruby-ui/ruby_ui) [components](https://rubyui.com/docs/introduction).
+
+Users will also check their work using the Live Preview feature to later on deploy it to a remote server using [Kamal](https://kamal-deploy.org).
+
+We'll leverage experience with [Hotwire](https://hotwired.dev) to boost the UX with innovative and impactful approaches for developers (or just my) happiness. 
