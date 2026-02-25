@@ -18,8 +18,8 @@ fn create_and_run_project(project_name: String, path: String) -> Result<(), Stri
     // Create a new Rails app
     let rails_new = std::process::Command::new("docker")
         .args([
-            "run", "--rm", "-v",
-            &volume_mount,
+            "run", "--rm", 
+            "-v", &volume_mount,
             "-w", "/app",
             &docker_image,
             "rails", "new", &project_name, "--skip-bundle"

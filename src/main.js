@@ -10,8 +10,8 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
     const onMouseUp = () => {
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
+      // document.removeEventListener("mousemove", onMouseMove);
+      // document.removeEventListener("mouseup", onMouseUp);
     };
 
     document.addEventListener("mousemove", onMouseMove);
@@ -21,9 +21,15 @@ window.addEventListener('DOMContentLoaded', () => {
   ruphino.addEventListener("click", (e) => {
     if (isDragging) {
       e.preventDefault(); // Cancel accidental drag-click
+      isDragging = false;
       return;
     }
     console.log("🔥 CLICK FIRED 🔥", isDragging);
     onRuphinoClick(); // Only runs if not dragged
+  });
+
+  ruphino.addEventListener('contextmenu', function(event) {
+    event.preventDefault(); // Prevent the default context menu
+    alert('Show the radial menu.');
   });
 });
