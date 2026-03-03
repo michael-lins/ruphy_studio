@@ -11,3 +11,46 @@ The idea is to allow Ruby on Rails projects to be created from scratch (and atta
 Users will also check their work using the Live Preview feature to later on deploy it to a remote server using [Kamal](https://kamal-deploy.org).
 
 We'll leverage experience with [Hotwire](https://hotwired.dev) to boost the UX with innovative and impactful approaches for developers (or just my) happiness. 
+
+## Install
+
+Install mise-en-place
+> https://github.com/jdx/mise
+
+Install tools
+```
+mise - firstall
+```
+
+Install dependencies
+```
+bun install
+```
+
+### (Linux)
+Install webkit2gtk-4.1
+
+On Arch Linux / Manjaro:
+```
+sudo pacman -S webkit2gtk-4.1
+```
+
+On Debian / Ubuntu:
+```
+sudo apt install libwebkit2gtk-4.1-dev
+```
+
+On Fedora:
+```
+sudo dnf install webkit2gtk4.1-devel
+```
+
+## Run 
+Run it locally
+```
+npm run tauri dev
+```
+
+Build it for distribution
+```
+npm run tauri build
