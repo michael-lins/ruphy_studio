@@ -13,3 +13,27 @@ Ruphy Studio is a hybrid Desktop/Web application, being a resident desktop alway
 Ruphino will help users create beautiful web interfaces by interacting with a seemless UI lib (RuphyCL), powered by [Hotwire](https://hotwire.dev) and ready to be deployed to remote servers using [Kamal](https://kamal-deploy.org).
 
 Ruphy Studio is now using [Glimmer DSL SWT](https://github.com/AndyObtiva/glimmer-dsl-swt) for the cross platform desktop application (previous versions built with Rust/Tauri->Go/Wails), making the platform Ruby driven!
+
+## Install
+
+Install mise-en-place
+> https://github.com/jdx/mise
+
+Install Java runtine (or JDK) for your OS
+> https://openjdk.org/install/
+
+Install tools
+```
+mise install
+```
+
+Install ruby gems (using jruby)
+```
+jruby -S bundle install
+```
+
+## Run 
+Run it locally
+```
+jruby app/main.rb
+```
