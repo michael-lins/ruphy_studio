@@ -1,3 +1,2 @@
 [tools]
-ruby = "4.0.1"
-bun = "latest"
+ruby = "jruby-10.0.3.0"
