@@ -1,3 +1,4 @@
 require_relative 'ui/ruphino_window'
 
-RuphinoWindow.new.open
+ruphy_studio = RuphinoWindow.new
+ruphy_studio.start

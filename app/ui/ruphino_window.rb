@@ -10,7 +10,7 @@ class RuphinoWindow
     @shell = build_shell
   end
 
-  def open
+  def start
     @shell.open
   end
 
