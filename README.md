@@ -1,15 +1,109 @@
-# Ruphy Studio &trade;
-> ### _Drag and Drop your Rails project from Idea to IPO_
+# Ruphy Studio ™
+> _Drag and Drop your Rails project from Idea to IPO_
 
-Ruphy Studio &trade; is a Rapid Application Development (RAD) platform for Ruby on Rails projects with a [Delphi](https://en.wikipedia.org/wiki/History_of_Delphi_(software)) experience flavor in mind. This is simply my love letter for myself (my 20-years-ago self).
+Ruphy Studio ™ is a Rapid Application Development (RAD) platform for Ruby on Rails with a Delphi-inspired experience.
 
-## Main Goal
-> ### _That's the goal: to keep the wheel running from a new perspective, not reinventing it._
+It is my love letter to my 20-years-ago self.
 
-The main idea is to allow Ruby on Rails projects to be created from scratch (and attach them to remote Git repositories) and to provide a new Drag and Drop experience to build WYSIWYG views using [Css-Zero](https://csszero.lazaronixon.com) and later on [Ruby UI](https://github.com/ruby-ui/ruby_ui) [components](https://rubyui.com/docs/introduction) with the help of Ruphine (Ruphy's maskot!).
+---
 
-Ruphy Studio is a hybrid Desktop/Web application, being a resident desktop always on top application, no intrusive, that will show Ruphino when started. Once created, the Rails app will be run and Ruphino will jump into the Web Application, appearing inside the index page!
+## Vision
 
-Ruphino will help users create beautiful web interfaces by interacting with a seemless UI lib (RuphyCL), powered by [Hotwire](https://hotwire.dev) and ready to be deployed to remote servers using [Kamal](https://kamal-deploy.org).
+> _Keep the wheel running from a new perspective — not reinventing it._
 
-Ruphy Studio is now using [Glimmer DSL SWT](https://github.com/AndyObtiva/glimmer-dsl-swt) for the cross platform desktop application (previous versions built with Rust/Tauri->Go/Wails), making the platform Ruby driven!
+Ruphy Studio aims to:
+
+- Create Rails applications from scratch
+- Attach them to remote Git repositories
+- Provide a Drag & Drop WYSIWYG experience, powered by [Hotwire](https://hotwire.dev) and ready to be deployed to remote servers using [Kamal](https://kamal-deploy.org)
+- Use a seamless UI component system, RuphyCL, powered by [Css-Zero](https://csszero.lazaronixon.com) and later on [Ruby UI](https://github.com/ruby-ui/ruby_ui) [components](https://rubyui.com/docs/introduction)
+- Stay 100% Rails-compatible
+- Support remote deployment via Kamal (through a remote deployer)
+
+The goal is not to replace Rails —  
+it is to elevate the Rails experience.
+
+---
+
+## Architecture (Current POC State)
+
+Ruphy Studio is a hybrid Desktop/Web application:
+
+- Desktop shell powered by Glimmer DSL for SWT
+- Running on **JRuby**
+- Generates real **Rails 7.1.x** applications
+- Uses JDBC adapters for cross-platform SQLite support
+- Designed to deploy via MRI + Kamal (remote deployer model)
+
+### Runtime Strategy
+
+**Local Development**
+- JRuby 9.4.x
+- Rails 7.1.x
+- `activerecord-jdbcsqlite3-adapter`
+- No native compilation required
+- Cross-platform: macOS / Linux / Windows
+
+**Deployment**
+- MRI Ruby
+- Standard `sqlite3` gem
+- Kamal executed remotely
+
+This keeps development friction-free while preserving production compatibility.
+
+---
+
+## Rails Seed Project Design
+
+Generated Rails apps:
+
+- Rails 7.1.x
+- SQLite database
+- JDBC adapter under JRuby
+- Native `sqlite3` under MRI
+- No Docker
+- No local Kamal dependency
+
+The project remains fully compatible with standard Rails workflows.
+
+---
+
+## Install
+
+### Install mise
+
+https://github.com/jdx/mise
+
+---
+
+### Install Java (JDK recommended)
+
+https://openjdk.org/install/
+
+JRuby requires a working Java runtime.
+
+---
+
+### Install Toolchain
+
+From project root:
+
+```bash
+mise install
+```
+
+### Install ruby gems (using jruby)
+```bash
+jruby -S bundle install
+```
+
+## Run the development version
+
+### Run it locally
+```bash
+jruby app/main.rb
+```
+## Build the distribution version
+
+### Build it using Glimmer
+
