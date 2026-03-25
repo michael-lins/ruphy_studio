@@ -1,11 +1,12 @@
 # Ruphy Studio ™
+![Ruphy's maskot: ruphino!](/icons/ruphino.png)
+---
+
 > _Drag and Drop your Rails project from Idea to IPO_
 
 Ruphy Studio ™ is a Rapid Application Development (RAD) platform for Ruby on Rails with a Delphi-inspired experience.
 
 It is my love letter to my 20-years-ago self.
-
----
 
 ## Vision
 
